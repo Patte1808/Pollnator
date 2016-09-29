@@ -4,6 +4,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import PollAnswersForm from './PollAnswersForm';
 
 import {connect} from 'react-redux';
+import * as PollActions from '../actions/actions';
+import {bindActionCreators} from 'redux';
 
 const style = {
   margin: 12,
@@ -43,4 +45,14 @@ const PollForm = ({pollForm, actions}) => {
   );
 };
 
-export default PollForm;
+const mapStateToProps = (state) => {
+  return {
+    pollForm: state
+  }
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  actions: bindActionCreators(PollActions, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PollForm);
