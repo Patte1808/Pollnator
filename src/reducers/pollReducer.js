@@ -1,6 +1,7 @@
-import {ADD_POLL, ADD_POLL_ANSWER} from '../actions/actions';
+import {ADD_POLL, ADD_POLL_ANSWER, ADD_POLL_ANSWER_EMPTY} from '../actions/actions';
 
 let initialState = {
+  polls: [],
   pollForm: {
     id: null,
     title: '',
@@ -14,14 +15,13 @@ const update = (state, mutations) =>
 function pollReducer(state = initialState, action) {
   switch(action.type) {
     case ADD_POLL:
-      return {
-        id: action.id,
-        title: action.title,
-        answers: action.answers
-      }
+      return update(state, state.polls.push(action.poll));
 
     case ADD_POLL_ANSWER:
-        return update(state, state.pollForm.answers.push(''));
+      return update(state, state.pollForm.answers[action.id] = action.answer);
+
+    case ADD_POLL_ANSWER_EMPTY:
+      return update(state, state.pollForm.answers.push(''));
 
     default:
       return state;

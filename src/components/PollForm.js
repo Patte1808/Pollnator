@@ -12,13 +12,29 @@ const style = {
 const PollForm = ({pollForm, actions}) => {
 
   const {answers} = pollForm;
-  const {addPollAnswer} = actions;
+  const {addPollAnswer, addPollAnswerEmpty, addPoll} = actions;
+
+  const onAddPoll = () => {
+    let poll = pollForm;
+    let sanitizedAnswers = [];
+    poll.id = Math.random();
+
+    for(let i = 0; i < answers.length; i++) {
+      if(answers[i] !== '') {
+        sanitizedAnswers.push(answers[i]);
+      }
+    }
+
+    poll.answers = sanitizedAnswers;
+
+    addPoll(poll);
+  };
 
   return (
-    <div>
+    <div style={style}>
       <TextField hintText="Type your question here" /><br />
-      <PollAnswersForm answers={answers} addPollAnswer={addPollAnswer} />
-      <RaisedButton label="Primary" primary={true} style={style} />
+      <PollAnswersForm answers={answers} addPollAnswer={addPollAnswer} addPollAnswerEmpty={addPollAnswerEmpty} />
+      <RaisedButton label="Create Poll" primary={true} onClick={onAddPoll} />
     </div>
   );
 };
