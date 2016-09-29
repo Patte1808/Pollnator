@@ -3,11 +3,12 @@ import thunk from 'redux-thunk';
 import promise from 'redux-promise';
 import createLogger from 'redux-logger';
 
-import pollApp from './reducers/index';
+//import pollApp from './reducers/index';
+import pollReducer from './reducers/pollReducer';
 
 const logger = createLogger();
 const store = createStore(
-  pollApp,
+  pollReducer,
   applyMiddleware(thunk, promise, logger)
 );
 
