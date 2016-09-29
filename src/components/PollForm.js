@@ -12,7 +12,7 @@ const style = {
 const PollForm = ({pollForm, actions}) => {
 
   const {answers} = pollForm;
-  const {addPollAnswer, addPollAnswerEmpty, addPoll} = actions;
+  const {addPollAnswer, addPollAnswerEmpty, addPoll, changePollTitle} = actions;
 
   const onAddPoll = () => {
     let poll = pollForm;
@@ -30,9 +30,13 @@ const PollForm = ({pollForm, actions}) => {
     addPoll(poll);
   };
 
+  const onChangePollTitle = (e) => {
+    changePollTitle(e.target.value);
+  }
+
   return (
     <div style={style}>
-      <TextField hintText="Type your question here" /><br />
+      <TextField hintText="Type your question here" onChange={onChangePollTitle} /><br />
       <PollAnswersForm answers={answers} addPollAnswer={addPollAnswer} addPollAnswerEmpty={addPollAnswerEmpty} />
       <RaisedButton label="Create Poll" primary={true} onClick={onAddPoll} />
     </div>

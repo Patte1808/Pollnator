@@ -1,4 +1,4 @@
-import {ADD_POLL, ADD_POLL_ANSWER, ADD_POLL_ANSWER_EMPTY} from '../actions/actions';
+import {ADD_POLL, ADD_POLL_ANSWER, ADD_POLL_ANSWER_EMPTY, CHANGE_POLL_TITLE} from '../actions/actions';
 
 let initialState = {
   polls: [],
@@ -22,6 +22,9 @@ function pollReducer(state = initialState, action) {
 
     case ADD_POLL_ANSWER_EMPTY:
       return update(state, state.pollForm.answers.push(''));
+
+    case CHANGE_POLL_TITLE:
+      return update(state, state.pollForm.title = action.title);
 
     default:
       return state;
